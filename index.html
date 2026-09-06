@@ -7,12 +7,19 @@
     <title>GasReport-Turnstile</title>
     <link rel="stylesheet" href="styles.css" />
     <link rel="icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="preconnect" href="https://challenges.cloudflare.com" />
+    <script
+      src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+      async
+      defer></script>
   </head>
   <body>
-    <main>
-      <h1>GasReport Verify</h1>
-      <p>GasReport front end verify user is not a bot here</p>
-    </main>
-    <script src="scripts.js"></script>
+    <div class="cf-turnstile" data-sitekey="0x4AAAAAAEqlGPMYvYX7deFH"></div>
+    <div
+      class="cf-turnstile"
+      data-sitekey="0x4AAAAAAEqlGPMYvYX7deFH"
+      data-theme="light"
+      data-size="normal"
+      data-callback="onSuccess"></div>
   </body>
 </html>
