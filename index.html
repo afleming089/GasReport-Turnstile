@@ -14,7 +14,12 @@
       defer></script>
   </head>
   <body>
-    <div class="cf-turnstile" data-sitekey="0x4AAAAAAEqlGPMYvYX7deFH"></div>
+    <div
+      class="cf-turnstile"
+      data-sitekey="0x4AAAAAAEqlGPMYvYX7deFH"
+      data-callback="onSuccess"
+      data-error-callback="onError"
+      data-expired-callback="onExpired"></div>
   </body>
   <script>
     function onSuccess(token) {
