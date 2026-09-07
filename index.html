@@ -16,4 +16,21 @@
   <body>
     <div class="cf-turnstile" data-sitekey="0x4AAAAAAEqlGPMYvYX7deFH"></div>
   </body>
+  <script>
+    function onSuccess(token) {
+      window.ReactNativeWebView.postMessage(
+        JSON.stringify({ type: "TOKEN", payload: token }),
+      );
+    }
+    function onError(error) {
+      window.ReactNativeWebView.postMessage(
+        JSON.stringify({ type: "ERROR", payload: error }),
+      );
+    }
+    function onExpired() {
+      window.ReactNativeWebView.postMessage(
+        JSON.stringify({ type: "EXPIRED" }),
+      );
+    }
+  </script>
 </html>
