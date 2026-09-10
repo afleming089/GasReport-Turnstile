@@ -1,41 +1,21 @@
 <!doctype html>
 <html lang="en">
   <head>
+    <title>Turnstile</title>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>GasReport-Turnstile</title>
-    <link rel="stylesheet" href="styles.css" />
-    <link rel="icon" href="favicon.ico" type="image/x-icon" />
-    <link rel="preconnect" href="https://challenges.cloudflare.com" />
     <script
-      src="https://challenges.cloudflare.com/turnstile/v0/api.js"
-      async
+      src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit"
       defer></script>
   </head>
   <body>
-    <div
-      class="cf-turnstile"
-      data-sitekey="0x4AAAAAAEqlGPMYvYX7deFH"
-      data-callback="onSuccess"
-      data-error-callback="onError"
-      data-expired-callback="onExpired"></div>
+    <div id="turnstile-container"></div>
   </body>
   <script>
-    function onSuccess(token) {
-      window.ReactNativeWebView.postMessage(
-        JSON.stringify({ type: "TOKEN", payload: token }),
-      );
-    }
-    function onError(error) {
-      window.ReactNativeWebView.postMessage(
-        JSON.stringify({ type: "ERROR", payload: error }),
-      );
-    }
-    function onExpired() {
-      window.ReactNativeWebView.postMessage(
-        JSON.stringify({ type: "EXPIRED" }),
-      );
-    }
+    const widgetId = turnstile.render("#turnstile-container", {
+      sitekey: "0x4AAAAAAEqlGPMYvYX7deFH",
+      callback: function (token) {
+        console.log("Success:", token);
+      },
+    });
   </script>
 </html>
