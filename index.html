@@ -3,19 +3,38 @@
   <head>
     <title>Turnstile</title>
     <meta charset="UTF-8" />
-    <script
-      src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit"
-      defer></script>
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="upgrade-insecure-requests" />
+      <script
+        src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+        async
+        defer></script>
   </head>
-  <body>
-    <div id="turnstile-container"></div>
-  </body>
-  <script>
-    const widgetId = turnstile.render("#turnstile-container", {
-      sitekey: "0x4AAAAAAEqlGPMYvYX7deFH",
-      callback: function (token) {
-        console.log("Success:", token);
-      },
-    });
-  </script>
+    <body>
+      <div
+        class="cf-turnstile"
+        data-sitekey="0x4AAAAAAEqlGPMYvYX7deFH"
+        data-callback="onSuccess"
+        data-error-callback="onError"
+        data-expired-callback="onExpired"></div>
+    </body>
+    <script>
+      function onSuccess(token) {
+        window.ReactNativeWebView.postMessage(
+          JSON.stringify({ type: "TOKEN", payload: token }),
+        );
+      }
+      function onError(error) {
+        window.ReactNativeWebView.postMessage(
+          JSON.stringify({ type: "ERROR", payload: error }),
+        );
+      }
+      function onExpired() {
+        window.ReactNativeWebView.postMessage(
+          JSON.stringify({ type: "EXPIRED" }),
+        );
+      }
+    </script>
+  </html>
 </html>
